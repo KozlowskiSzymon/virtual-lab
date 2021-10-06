@@ -19,8 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
         'email',
-        'password',
+        'login',
+        'status'
     ];
 
     /**
@@ -33,12 +35,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function create ($name, $surname, $email, $login, $password, $status) {
+        $this->fillable['name'] = $name;
+        $this->fillable['surname'] = $surname;
+        $this->fillable['email'] = $email;
+        $this->fillable['login'] = $login;
+        $this->fillable['password'] = $password;
+        $this->fillable['status'] = $status;
+    }
 }
