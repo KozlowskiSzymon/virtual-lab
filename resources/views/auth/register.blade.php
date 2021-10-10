@@ -47,6 +47,14 @@
                     <input type="password" class="form-control" placeholder="Enter password" name="password" value="">
                     <span class="text-danger">@error('password') {{$message}} @enderror</span>
                 </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select class="form-control" name="role">
+                        <option value="{{\App\Models\Role::Admin}}">Admin</option>
+                        <option value="{{\App\Models\Role::User}}">User</option>
+                    </select>
+                    <span class="text-danger">@error('password') {{$message}} @enderror</span>
+                </div>
                 <div class="form-group" style="margin-top: 20px;">
                     <button class="btn btn-block btn-primary" type="submit">Add</button>
                 </div>

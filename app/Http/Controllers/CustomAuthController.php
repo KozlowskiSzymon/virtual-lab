@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +26,7 @@ class CustomAuthController extends Controller
             'surname'=>'required',
             'email'=>'required|email|unique:users',
             'login'=>'required|unique:users',
-            'password'=>'required'
+            'password'=>'required',
         ]);
         $user = new User();
         $user->name = $request->name;
@@ -33,6 +34,7 @@ class CustomAuthController extends Controller
         $user->email = $request->email;
         $user->login = $request->login;
         $user->password = Hash::make($request->password);
+        $user->role = $request->role;
         $res = $user->save();
         if ($res) {
             return back()->with('success', 'User added.');
