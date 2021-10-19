@@ -9,6 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 </head>
 <body>
+<header class="row">
+    @include('components.navbar')
+</header>
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4" style="margin-top: 20px;">
