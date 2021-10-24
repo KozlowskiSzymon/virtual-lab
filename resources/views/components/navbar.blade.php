@@ -7,7 +7,7 @@
         <div class="navbar-nav"  style="margin-left: auto" >
             <a class="nav-item nav-link active" href="{{'/dashboard'}}">Home</a>
             <a class="nav-item nav-link" href="{{'/register'}}">Manage user</a>
-            <a class="nav-item nav-link" href="{{'/dashboard'}}">Logout</a>
+            <a class="nav-item nav-link" href="{{'/dashboard'}}">Login</a>
         </div>
     </div>
 </nav>

@@ -42,6 +42,7 @@ class CustomAuthController extends Controller
             return back()->with('fail', 'Error occurred. User has not been added.');
         }
     }
+
     public function loginUser(Request $request) {
         $request->validate([
             'login'=>'required',
@@ -58,9 +59,5 @@ class CustomAuthController extends Controller
         } else {
             return back()->with('fail', 'User is not registered.');
         }
-    }
-
-    public function dashboard() {
-        return view("dashboard");
     }
 }

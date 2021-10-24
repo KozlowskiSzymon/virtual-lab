@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
 
@@ -14,11 +15,9 @@ use App\Http\Controllers\CustomAuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/', [Controller::class, 'onFilterChange']);
+Route::post('/', [Controller::class, 'onFilterChange']);
 Route::get('/login', [CustomAuthController::class, 'login']);
 Route::get('/register', [CustomAuthController::class, 'register']);
 Route::post('/register-user', [CustomAuthController::class, 'registerUser'])->name('register-user');
 Route::post('/login-user', [CustomAuthController::class, 'loginUser'])->name('login-user');
-Route::get('/dashboard', [CustomAuthController::class, 'dashboard']);

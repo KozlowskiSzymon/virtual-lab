@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'email' => 'james.bond@gmail.com',
             'login' => 'james.bond',
             'password' => Hash::make('password'),
-            'status' => Role::Admin
+            'role' => Role::Admin
         ]);
         DB::table('users')->insert([
             'name' => 'John',
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             'email' => 'john.wall@gmail.com',
             'login' => 'john.wall',
             'password' => Hash::make('password'),
-            'status' => Role::Admin
+            'role' => Role::Admin
         ]);
         DB::table('users')->insert([
             'name' => 'Michael',
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
             'email' => 'michael.jordan@gmail.com',
             'login' => 'michael.jordan',
             'password' => Hash::make('password'),
-            'status' => Role::User
+            'role' => Role::User
         ]);
         DB::table('users')->insert([
             'name' => 'Kobe',
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
             'email' => 'kobe.bryant@gmail.com',
             'login' => 'kobe.bryant',
             'password' => Hash::make('password'),
-            'status' => Role::User
+            'role' => Role::User
         ]);
         DB::table('users')->insert([
             'name' => 'Anna',
@@ -54,7 +54,7 @@ class UserSeeder extends Seeder
             'email' => 'anna.karenina@gmail.com',
             'login' => 'anna.karenina',
             'password' => Hash::make('password'),
-            'status' => Role::User
+            'role' => Role::User
         ]);
     }
 }
