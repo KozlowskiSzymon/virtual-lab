@@ -25,6 +25,30 @@ class ItemSeeder extends Seeder
             'quantity' => 2,
         ]);
         DB::table('items')->insert([
+            'name' => 'Macbook',
+            'model' => 'Air 13,3"',
+            'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYGpW3iKIEjePrsZiC8_mIAY36mUOswW70pg&usqp=CAU',
+            'description' => 'Ekran: 13,3 cala, 2560 x 1600 pikseli. Procesor: Intel Core i5 8gen 2,4 - 4,1 GHz. Pamięć: 16 GB LPDDR3 RAM. Dysk: 512 GB SSD. Grafika: Intel Iris Plus Graphics 655. System operacyjny: Mac OS Mojave',
+            'url' => 'https://www.euro.com.pl/laptopy-i-netbooki/apple-macbook-12-intel-core-m3-8gb-ram-256gb-dysk-osx-sierra_1.bhtml',
+            'quantity' => 3,
+        ]);
+        DB::table('items')->insert([
+            'name' => 'Macbook',
+            'model' => 'Air M1',
+            'image' => 'https://f01.esfr.pl/foto/8/74215255585/79c342bb6c51c3bdec99266a26137bee/apple-laptop-macbook-air-13-m1-8gb-256ssd,74215255585_8.jpg',
+            'description' => 'New macbook, 8 Gb RAM, 256 Gb SSh, grey',
+            'url' => 'https://www.euro.com.pl/laptopy-i-netbooki/apple-laptop-macbook-air-13-m1-8gb-256ssd.bhtml',
+            'quantity' => 2,
+        ]);
+        DB::table('items')->insert([
+            'name' => 'Macbook',
+            'model' => 'Pro 13"',
+            'image' => 'https://f00.esfr.pl/foto/8/45550042857/c5ff555215356ddb55f8e95019583350/apple-laptop-mb-pro-13-tb-i5-8gb-512ssd-silver,45550042857_8.jpg',
+            'description' => 'Ekran: 13,3 cala, 2560 x 1600 pikseli. Procesor: Intel Core i5 8gen 2,4 - 4,1 GHz. Pamięć: 8 GB LPDDR3 RAM. Dysk: 512 GB SSD. Grafika: Intel Iris Plus Graphics 655. System operacyjny: Mac OS Mojave',
+            'url' => 'https://www.euro.com.pl/laptopy-i-netbooki/apple-laptop-mb-pro-13-tb-i5-8gb-512ssd-silver.bhtml',
+            'quantity' => 5,
+        ]);
+        DB::table('items')->insert([
             'name' => 'Oscilloscope',
             'model' => 'MSO2008W',
             'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-rziBGWYgvrxqCePB8tYQ2PGzvn_tHQO4lA&usqp=CAU',

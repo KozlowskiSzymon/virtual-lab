@@ -5,9 +5,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav"  style="margin-left: auto" >
-            <a class="nav-item nav-link active" href="{{'/dashboard'}}">Home</a>
+            <a class="nav-item nav-link active" href="{{'/'}}">Home</a>
             <a class="nav-item nav-link" href="{{'/register'}}">Manage user</a>
-            <a class="nav-item nav-link" href="{{'/dashboard'}}">Login</a>
+            <a class="nav-item nav-link" href="{{'/login'}}">Login</a>
         </div>
     </div>
 </nav>
