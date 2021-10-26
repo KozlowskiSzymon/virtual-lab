@@ -16,18 +16,15 @@ class Controller extends BaseController
 
     public function onFilterChange(Request $request) {
 
-        $data = array();
+        $items = array();
 
-        if ($request -> filter != null) {
-            if (sizeof($request -> filter) > 0) {
-                $data = Item::query()->where('keywords', 'in', $request -> filter)->get();
-                echo $data;
-            } else {
-                $data = DB::table('items')->get();
-                echo sizeof($data);
-            }
+        if ($request -> filter != null && sizeof($request -> filter) > 0) {
+            $items = Item::query()->where('keywords', '=', $request -> filter)->get();
+        } else {
+            $items = DB::table('items')->get();
         }
-        return view("dashboard", compact('data'));
+        $items = json_decode($items, true);
+        return view("dashboard", compact('items'));
 
     }
 }

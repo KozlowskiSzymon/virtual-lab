@@ -17,7 +17,7 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->string('name', 128)->unique();
             $table->string('model', 128);
-            $table->binary('image');
+            $table->string('image', 4096);
             $table->string('description', 1024);
             $table->string('url', 256);
             $table->integer('quantity');
