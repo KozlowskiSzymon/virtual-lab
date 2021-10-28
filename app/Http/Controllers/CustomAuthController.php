@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class CustomAuthController extends Controller
 {
@@ -15,9 +16,12 @@ class CustomAuthController extends Controller
         return view("auth.login");
     }
 
-    public function register(): string
+    public function register()
     {
-        return view("auth.register");
+        $users = array();
+        $users = DB::table('users')->get();
+        $users = json_decode($users, true);
+        return view("auth.register", compact('users'));
     }
 
     public function registerUser(Request $request) {
@@ -51,13 +55,21 @@ class CustomAuthController extends Controller
         $user = User::query()->where('login', '=', $request->login)->first();
         if ($user){
             if(Hash::check($request->password, $user->password)) {
-                $request->session()->put('loginId', $user->id);
-                return redirect('dashboard');
+                Session::put('loginId', $user->id);
+                Session::put('role', $user->role);
+                return redirect('/');
             } else {
                 return back()->with('fail', 'Wrong password.');
             }
         } else {
             return back()->with('fail', 'User is not registered.');
+        }
+    }
+
+    public function logoutUser(Request $request) {
+        if (Session::has('loginId')) {
+            Session::pull('loginId');
+            return redirect('login');
         }
     }
 }

@@ -6,8 +6,23 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav"  style="margin-left: auto" >
             <a class="nav-item nav-link active" href="{{'/'}}">Home</a>
-            <a class="nav-item nav-link" href="{{'/register'}}">Manage user</a>
+            <?php if(Session()->has('loginId') && Session()->get('role') == 'ADMIN') {?>
+            <a class="nav-item nav-link" href="{{'/register'}}">Users</a>
+            <?php }else{} ?>
+            <?php if(Session()->has('loginId') && Session()->get('role') == 'ADMIN') {?>
+            <a class="nav-item nav-link" href="{{'/items'}}">Items</a>
+            <?php }else{} ?>
+            <?php if(Session()->has('loginId') && Session()->get('role') == 'ADMIN') {?>
+            <a class="nav-item nav-link" href="{{'/keywords'}}">Keywords</a>
+            <?php }else{} ?>
+            <?php if(Session()->has('loginId')) {?>
+            <a class="nav-item nav-link" href="{{'/profile'}}">Profile</a>
+            <?php }else{} ?>
+            <?php if(Session()->has('loginId')) {?>
+            <a class="nav-item nav-link" href="{{'/logout'}}">Logout</a>
+            <?php }else{ ?>
             <a class="nav-item nav-link" href="{{'/login'}}">Login</a>
+            <?php } ?>
         </div>
     </div>
 </nav>
