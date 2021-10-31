@@ -9,6 +9,8 @@ class User extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['password'];
+
     public function items()
     {
         return $this->belongsToMany(Item::class);

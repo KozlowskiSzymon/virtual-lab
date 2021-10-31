@@ -26,9 +26,9 @@
                 <div class="row">
                     <form action="" method="post">
                         @csrf
-                        <select name="filter[]" class="selectpicker" multiple>
+                        <select id="filterSelect" name="filter[]" class="selectpicker" multiple>
                             @foreach($keywords as $row)
-                                <option value="{{$row['id']}}">{{$row['name']}}</option>
+                                <option value="{{$row['id']}}" {{ in_array($row["id"], $oldFilter) ? 'selected' : '' }}>{{$row['name']}}</option>
                             @endforeach
                         </select>
                         <input type="submit" value="Submit">

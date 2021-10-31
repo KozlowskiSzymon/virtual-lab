@@ -24,8 +24,8 @@ class ItemController extends Controller
             }
             $items = $itemsFiltered;
         }
-
-        return view("dashboard", compact('items', 'keywords'));
+        $oldFilter = $request -> filter ?: [];
+        return view("dashboard", compact('items', 'keywords', 'oldFilter'));
     }
 
     public function borrowItem(Request $request) {
@@ -43,7 +43,15 @@ class ItemController extends Controller
 
     }
 
-    function test_sth($val, $request) {
-        return ;
+    public function removeItem(Request $request) {
+        $item = Item::query()->where('id', '=', $request->id)->first();
+        $item->users()->detach();
+        $item->keywords()->detach();
+        $item->delete();
+        return $this->items();
+    }
+
+    public function addItem(Request $request) {
+
     }
 }

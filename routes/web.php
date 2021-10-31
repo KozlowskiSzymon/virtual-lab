@@ -23,10 +23,13 @@ Route::post('/', [ItemController::class, 'onFilterChange']);
 Route::get('/borrow', [ItemController::class, 'borrowItem'])->middleware('isLoggedIn');
 Route::get('/items', [ItemController::class, 'items'])->middleware('isLoggedIn');
 Route::post('/edit-item', [ItemController::class, 'editItem'])->name('edit-item')->middleware('isLoggedIn');
+Route::post('/delete-item', [ItemController::class, 'removeItem'])->middleware('isLoggedIn');
+Route::post('/add-item', [ItemController::class, 'addItem'])->middleware('isLoggedIn');
 
 
 
 Route::get('/profile', [UserController::class, 'profile'])->middleware('isLoggedIn');
+Route::get('/edit-user', [UserController::class, 'editUser'])->middleware('isLoggedIn');
 Route::post('/delete-user', [UserController::class, 'removeUser'])->middleware('isLoggedIn');
 Route::post('/change-password', [UserController::class, 'changePassword'])->middleware('isLoggedIn');
 

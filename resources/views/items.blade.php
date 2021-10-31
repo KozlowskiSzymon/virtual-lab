@@ -23,7 +23,7 @@
         <div class="col-12" style="padding: 20px 20px 20px 20px;">
             <h4>Items</h4>
             <hr>
-            <form action="add-keyword" method="post">
+            <form action="add-item" method="post">
                 @if(Session::has('success'))
                     <div class="alert alert-success">{{Session::get('success')}}</div>
                 @endif
@@ -32,9 +32,34 @@
                 @endif
                 @csrf
                 <div class="form-group">
-                    <label for="keyword">Add new keyword:</label>
-                    <input type="name" class="form-control" placeholder="Enter keyword" name="name" value="{{old('keyword')}}">
-                    <span class="text-danger">@error('keyword') {{$message}} @enderror</span>
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{old('name')}}">
+                    <span class="text-danger">@error('name') {{$message}} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="model">Model</label>
+                    <input type="text" class="form-control" placeholder="Enter model" name="model" value="{{old('model')}}">
+                    <span class="text-danger">@error('model') {{$message}} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="text" class="form-control" placeholder="Enter image url" name="image" value="{{old('image')}}">
+                    <span class="text-danger">@error('image') {{$message}} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" placeholder="Enter description" name="description" value="{{old('description')}}">
+                    <span class="text-danger">@error('description') {{$message}} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="link">Link</label>
+                    <input type="text" class="form-control" placeholder="Enter link" name="link" value="{{old('link')}}">
+                    <span class="text-danger">@error('link') {{$message}} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="text" class="form-control" placeholder="Enter quantity" name="quantity" value="{{old('quantity')}}">
+                    <span class="text-danger">@error('quantity') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group" style="margin-top: 20px;">
                     <button class="btn btn-block btn-primary" type="submit">Add</button>
@@ -46,6 +71,8 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Model</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Quantity</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -53,8 +80,12 @@
                         <tr>
                             <td>{{$row['name']}}</td>
                             <td>{{$row['model']}}</td>
+                            <td>{{$row['description']}}</td>
+                            <td>{{$row['quantity']}}</td>
                             <td style="width: 5%; text-align: center; vertical-align: middle">
-                                <form action="/edit-keyword" method="post">
+                                <form action="/edit-item" method="post">
+                                    @csrf
+                                    <input type="hidden" value="{{$row['id']}}" name="id" />
                                     <button type="submit" class="btn btn-block btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
@@ -62,7 +93,9 @@
                                     </button>
                                 </form>
                             </td>                            <td style="width: 5%; text-align: center; vertical-align: middle">
-                                <form action="/delete-keyword" method="post">
+                                <form action="/delete-item" method="post">
+                                    @csrf
+                                    <input type="hidden" value="{{$row['id']}}" name="id" />
                                     <button type="submit" class="btn btn-block btn-danger">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>

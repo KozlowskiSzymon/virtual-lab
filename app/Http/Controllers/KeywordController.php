@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class KeywordController extends Controller
 {
-    public function keywords(Request $request) {
+    public function keywords() {
 
         $keywords = DB::table('keywords')->get();
         $keywords = json_decode($keywords, true);
@@ -29,6 +29,9 @@ class KeywordController extends Controller
         }
     }
     public function removeKeyword(Request $request) {
-
+        $keyword = Keyword::query()->where('id', '=', $request->id)->first();
+        $keyword->items()->detach();
+        $keyword->delete();
+        return $this->keywords();
     }
 }
