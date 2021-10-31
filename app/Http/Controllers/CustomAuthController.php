@@ -18,7 +18,6 @@ class CustomAuthController extends Controller
 
     public function register()
     {
-        $users = array();
         $users = DB::table('users')->get();
         $users = json_decode($users, true);
         return view("auth.register", compact('users'));

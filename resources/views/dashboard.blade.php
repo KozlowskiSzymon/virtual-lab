@@ -25,10 +25,11 @@
                 <label for="filter">Search</label>
                 <div class="row">
                     <form action="" method="post">
+                        @csrf
                         <select name="filter[]" class="selectpicker" multiple>
-                            <option value="1">Key word 1</option>
-                            <option value="2">Key word 2</option>
-                            <option value="5">Key word 5</option>
+                            @foreach($keywords as $row)
+                                <option value="{{$row['id']}}">{{$row['name']}}</option>
+                            @endforeach
                         </select>
                         <input type="submit" value="Submit">
                     </form>
@@ -64,10 +65,9 @@
                             <td colspan="3" style="word-wrap: break-word;">{{$row['description']}}</td>
                             <td style="width: 10%">
                                 <table style="font-size: 75%; font-weight: bold">
-                                    <tr><td>Key word 1</td></tr>
-                                    <tr><td>Key word 2</td></tr>
-                                    <tr><td>Key word 3</td></tr>
-                                    <tr><td>Key word 4</td></tr>
+                                    @foreach($row['keywords'] as $keyword)
+                                    <tr><td>{{$keyword['name']}}</td></tr>
+                                    @endforeach
                                 </table>
                             </td>
                             <td style="width: 5%; text-align: center; vertical-align: middle">

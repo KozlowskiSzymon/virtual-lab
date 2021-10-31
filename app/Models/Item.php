@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function keywords()
+    {
+        return $this->belongsToMany(Keyword::class);
+    }
 }
