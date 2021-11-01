@@ -19,9 +19,10 @@ use App\Http\Controllers\CustomAuthController;
 */
 
 Route::get('/', [ItemController::class, 'onFilterChange']);
-Route::post('/', [ItemController::class, 'onFilterChange']);
+Route::get('/report', [ItemController::class, 'report'])->middleware('isLoggedIn');
 Route::get('/borrow', [ItemController::class, 'borrowItem'])->middleware('isLoggedIn');
 Route::get('/items', [ItemController::class, 'items'])->middleware('isLoggedIn');
+Route::post('/', [ItemController::class, 'onFilterChange']);
 Route::post('/edit-item', [ItemController::class, 'editItem'])->name('edit-item')->middleware('isLoggedIn');
 Route::post('/delete-item', [ItemController::class, 'removeItem'])->middleware('isLoggedIn');
 Route::post('/save-item', [ItemController::class, 'saveItem'])->middleware('isLoggedIn');

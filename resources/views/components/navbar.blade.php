@@ -15,6 +15,9 @@
             <?php if(Session()->has('loginId') && Session()->get('role') == 'ADMIN') {?>
             <a class="nav-item nav-link" href="{{'/keywords'}}">Keywords</a>
             <?php }else{} ?>
+            <?php if(Session()->has('loginId') && Session()->get('role') == 'ADMIN') {?>
+            <a class="nav-item nav-link" target="_blank" href="{{'/report'}}">Report</a>
+            <?php }else{} ?>
             <?php if(Session()->has('loginId')) {?>
             <a class="nav-item nav-link" href="{{'/profile'}}">Profile</a>
             <?php }else{} ?>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class ItemController extends Controller
@@ -117,5 +118,10 @@ class ItemController extends Controller
         $item->update(['available' => $item['available'] + 1]);
         $controller = new UserController();
         return $controller->profile();
+    }
+
+    public function report() {
+        $items = Item::query()->with('users')->get();
+        return view("report", compact('items'));
     }
 }
