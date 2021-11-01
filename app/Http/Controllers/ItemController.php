@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ItemController extends Controller
 {
@@ -14,7 +15,7 @@ class ItemController extends Controller
         $keywords = DB::table('keywords')->get();
         $keywords = json_decode($keywords, true);
 
-        $items = Item::query()->with('keywords')->get();
+        $items = Item::query()->with('keywords')->with('users')->get();
         $items = json_decode($items, true);
         if ($request -> filter != null && sizeof($request -> filter) > 0) {
             foreach ($items as $item) {
@@ -29,7 +30,13 @@ class ItemController extends Controller
     }
 
     public function borrowItem(Request $request) {
-        return view("auth.register");
+        $item = Item::query()->where('id', '=', $request->id)->first();
+        if ($item['available'] > 0) {
+            $available = $item['available'] - 1;
+            $item->update(['available' => $available]);
+            $item->users()->attach(Session::get('loginId'));
+        }
+        return back();
     }
 
     public function items() {
@@ -52,6 +59,23 @@ class ItemController extends Controller
     }
 
     public function addItem(Request $request) {
-
+        $request->validate([
+            'name'=>'required',
+            'model'=>'required|unique:items',
+            'quantity'=>'required',
+        ]);
+        $item = new Item();
+        $item->name = $request->name;
+        $item->model = $request->model;
+        $item->description = $request->description;
+        $item->image = $request->image;
+        $item->url = $request->url;
+        $item->quantity = $request->quantity;
+        $res = $item->save();
+        if ($res) {
+            return back()->with('success', 'Item added.');
+        } else {
+            return back()->with('fail', 'Error occurred. Item has not been added.');
+        }
     }
 }

@@ -22,7 +22,7 @@
         <div class="col-12" style="padding: 20px 20px 20px 20px;">
             <h4>Keywords</h4>
             <hr>
-            <form action="add-keyword" method="post">
+            <form action="save-keyword" method="post">
                 @if(Session::has('success'))
                     <div class="alert alert-success">{{Session::get('success')}}</div>
                 @endif
@@ -31,12 +31,22 @@
                 @endif
                 @csrf
                 <div class="form-group">
-                    <label for="keyword">Add new keyword:</label>
-                    <input type="name" class="form-control" placeholder="Enter keyword" name="name" value="{{old('keyword')}}">
-                    <span class="text-danger">@error('keyword') {{$message}} @enderror</span>
+                    @if($toEdit)
+                        <label for="keyword">Update keyword:</label>
+                        <input type="name" class="form-control" placeholder="Enter keyword" name="name" value="{{$toEdit['name']}}">
+                    @else
+                        <label for="keyword">Add new keyword:</label>
+                        <input type="name" class="form-control" placeholder="Enter keyword" name="name" value="{{old('keyword')}}">
+                    @endif
+                        <span class="text-danger">@error('keyword') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group" style="margin-top: 20px;">
-                    <button class="btn btn-block btn-primary" type="submit">Add</button>
+                    @if($toEdit)
+                        <input type="hidden" value="{{$toEdit['id']}}" name="id" />
+                        <button class="btn btn-block btn-primary" type="submit">Update</button>
+                    @else
+                        <button class="btn btn-block btn-primary" type="submit">Add</button>
+                    @endif
                 </div>
             </form>
             <div class="table-responsive">

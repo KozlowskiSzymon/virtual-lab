@@ -17,10 +17,11 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->string('name', 128);
             $table->string('model', 128)->unique();
-            $table->string('image', 4096);
-            $table->string('description', 1024);
-            $table->string('url', 256);
+            $table->string('image', 4096)->nullable();
+            $table->string('description', 1024)->nullable();
+            $table->string('url', 256)->nullable();
             $table->integer('quantity');
+            $table->integer('available');
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@ class ItemSeeder extends Seeder
             'description' => 'New macbook, 8 Gb RAM, 512 Gb SSh, grey.',
             'url' => 'https://www.apple.com/pl-edu/shop/buy-mac/macbook-pro/13-calowy-gwiezdna-szaro%C5%9B%C4%87-czip-apple-m1-z-8-rdzeniowym-cpu-i-8-rdzeniowym-gpu-256gb#',
             'quantity' => 2,
+            'available' => 2,
         ]);
         DB::table('items')->insert([
             'name' => 'Macbook',
@@ -31,6 +32,7 @@ class ItemSeeder extends Seeder
             'description' => 'Ekran: 13,3 cala, 2560 x 1600 pikseli. Procesor: Intel Core i5 8gen 2,4 - 4,1 GHz. Pamięć: 16 GB LPDDR3 RAM. Dysk: 512 GB SSD. Grafika: Intel Iris Plus Graphics 655. System operacyjny: Mac OS Mojave',
             'url' => 'https://www.euro.com.pl/laptopy-i-netbooki/apple-macbook-12-intel-core-m3-8gb-ram-256gb-dysk-osx-sierra_1.bhtml',
             'quantity' => 3,
+            'available' => 3,
         ]);
         DB::table('items')->insert([
             'name' => 'Macbook',
@@ -39,6 +41,7 @@ class ItemSeeder extends Seeder
             'description' => 'New macbook, 8 Gb RAM, 256 Gb SSh, grey',
             'url' => 'https://www.euro.com.pl/laptopy-i-netbooki/apple-laptop-macbook-air-13-m1-8gb-256ssd.bhtml',
             'quantity' => 2,
+            'available' => 2,
         ]);
         DB::table('items')->insert([
             'name' => 'Macbook',
@@ -47,6 +50,7 @@ class ItemSeeder extends Seeder
             'description' => 'Ekran: 13,3 cala, 2560 x 1600 pikseli. Procesor: Intel Core i5 8gen 2,4 - 4,1 GHz. Pamięć: 8 GB LPDDR3 RAM. Dysk: 512 GB SSD. Grafika: Intel Iris Plus Graphics 655. System operacyjny: Mac OS Mojave',
             'url' => 'https://www.euro.com.pl/laptopy-i-netbooki/apple-laptop-mb-pro-13-tb-i5-8gb-512ssd-silver.bhtml',
             'quantity' => 5,
+            'available' => 5,
         ]);
         DB::table('items')->insert([
             'name' => 'Oscilloscope',
@@ -55,6 +59,7 @@ class ItemSeeder extends Seeder
             'description' => '8 channels, sample rate 2 Ghz, memory 2Gb',
             'url' => 'https://www.acute.com.tw/logic-analyzer-en/product/mso/mso2000?gclid=CjwKCAjwkvWKBhB4EiwA-GHjFljNp65Bu0xmAxYImu1mV3JHgIa6XDT1MFh0Lzac1OA1MTFv4ZaUwRoC11oQAvD_BwE',
             'quantity' => 4,
+            'available' => 4,
         ]);
     }
 }

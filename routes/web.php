@@ -32,15 +32,16 @@ Route::get('/profile', [UserController::class, 'profile'])->middleware('isLogged
 Route::get('/edit-user', [UserController::class, 'editUser'])->middleware('isLoggedIn');
 Route::post('/delete-user', [UserController::class, 'removeUser'])->middleware('isLoggedIn');
 Route::post('/change-password', [UserController::class, 'changePassword'])->middleware('isLoggedIn');
+Route::post('/register-user', [UserController::class, 'registerUser'])->name('register-user')->middleware('isLoggedIn');
 
 
 Route::get('/keywords', [KeywordController::class, 'keywords'])->middleware('isLoggedIn');
 Route::post('/delete-keyword', [KeywordController::class, 'removeKeyword'])->middleware('isLoggedIn');
-Route::post('/add-keyword', [KeywordController::class, 'addKeyword'])->name('add-keyword')->middleware('isLoggedIn');
+Route::post('/save-keyword', [KeywordController::class, 'saveKeyword'])->name('add-keyword')->middleware('isLoggedIn');
+Route::post('/edit-keyword', [KeywordController::class, 'editKeyword'])->middleware('isLoggedIn');
 
 
 Route::get('/login', [CustomAuthController::class, 'login']);
 Route::get('/register', [CustomAuthController::class, 'register'])->middleware('isLoggedIn');
 Route::get('/logout', [CustomAuthController::class, 'logoutUser']);
-Route::post('/register-user', [CustomAuthController::class, 'registerUser'])->name('register-user')->middleware('isLoggedIn');
 Route::post('/login-user', [CustomAuthController::class, 'loginUser'])->name('login-user');

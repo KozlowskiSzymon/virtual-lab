@@ -9,6 +9,8 @@ class Item extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['available'];
+
     public function users()
     {
         return $this->belongsToMany(User::class);

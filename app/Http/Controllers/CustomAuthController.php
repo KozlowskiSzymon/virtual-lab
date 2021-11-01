@@ -23,29 +23,6 @@ class CustomAuthController extends Controller
         return view("auth.register", compact('users'));
     }
 
-    public function registerUser(Request $request) {
-        $request->validate([
-            'name'=>'required',
-            'surname'=>'required',
-            'email'=>'required|email|unique:users',
-            'login'=>'required|unique:users',
-            'password'=>'required',
-        ]);
-        $user = new User();
-        $user->name = $request->name;
-        $user->surname = $request->surname;
-        $user->email = $request->email;
-        $user->login = $request->login;
-        $user->password = Hash::make($request->password);
-        $user->role = $request->role;
-        $res = $user->save();
-        if ($res) {
-            return back()->with('success', 'User added.');
-        } else {
-            return back()->with('fail', 'Error occurred. User has not been added.');
-        }
-    }
-
     public function loginUser(Request $request) {
         $request->validate([
             'login'=>'required',
