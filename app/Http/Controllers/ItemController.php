@@ -43,11 +43,15 @@ class ItemController extends Controller
         $items = DB::table('items')->get();
         $items = json_decode($items, true);
 
-        return view("items", compact('items'));
+        $toEdit = null;
+        return view("items", compact('toEdit', 'items'));
     }
 
     public function editItem(Request $request) {
-
+        $items = DB::table('items')->get();
+        $items = json_decode($items, true);
+        $toEdit = Item::query()->where('id', '=', $request -> id)->first();
+        return view("items", compact('toEdit', 'items'));
     }
 
     public function removeItem(Request $request) {
@@ -58,24 +62,60 @@ class ItemController extends Controller
         return $this->items();
     }
 
-    public function addItem(Request $request) {
-        $request->validate([
-            'name'=>'required',
-            'model'=>'required|unique:items',
-            'quantity'=>'required',
-        ]);
-        $item = new Item();
-        $item->name = $request->name;
-        $item->model = $request->model;
-        $item->description = $request->description;
-        $item->image = $request->image;
-        $item->url = $request->url;
-        $item->quantity = $request->quantity;
-        $res = $item->save();
-        if ($res) {
-            return back()->with('success', 'Item added.');
+    public function saveItem(Request $request) {
+        if ($request -> id) {
+            $request->validate([
+                'name'=>'required',
+                'model'=>'required',
+                'quantity'=>'required',
+            ]);
+            $item = Item::query()->where('id', '=', $request -> id)->first();
+            $res = $item->update([
+                'name' => $request->name,
+                'model' => $request->model,
+                'description' => $request->description,
+                'image' => $request->image,
+                'url' => $request->url,
+                'quantity' => $request->quantity
+            ]);
+            $items = DB::table('items')->get();
+            $items = json_decode($items, true);
+            $toEdit = null;
+            if ($res) {
+                return view("items", compact('toEdit', 'items'))->with('success', 'Item updated.');
+            } else {
+                return view("items", compact('toEdit', 'items'))->with('fail', 'Error occurred. Item has not been updated.');
+            }
         } else {
-            return back()->with('fail', 'Error occurred. Item has not been added.');
+            $request->validate([
+                'name'=>'required',
+                'model'=>'required|unique:items',
+                'quantity'=>'required',
+            ]);
+            $item = new Item();
+            $item->name = $request->name;
+            $item->model = $request->model;
+            $item->description = $request->description;
+            $item->image = $request->image;
+            $item->url = $request->url;
+            $item->quantity = $request->quantity;
+            $res = $item->save();
+            $items = DB::table('items')->get();
+            $items = json_decode($items, true);
+            $toEdit = null;
+            if ($res) {
+                return view("items", compact('toEdit', 'items'))->with('success', 'Item added.');
+            } else {
+                return view("items", compact('toEdit', 'items'))->with('fail', 'Error occurred. Item has not been added.');
+            }
         }
+    }
+
+    public function returnItem(Request $request) {
+        $item = Item::query()->where('id', '=', $request->id)->first();
+        DB::delete('DELETE FROM item_user WHERE item_id = ? AND user_id = ? LIMIT 1',[$item->id, Session::get('loginId')]);
+        $item->update(['available' => $item['available'] + 1]);
+        $controller = new UserController();
+        return $controller->profile();
     }
 }

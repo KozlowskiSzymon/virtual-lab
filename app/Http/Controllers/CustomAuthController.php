@@ -20,7 +20,8 @@ class CustomAuthController extends Controller
     {
         $users = DB::table('users')->get();
         $users = json_decode($users, true);
-        return view("auth.register", compact('users'));
+        $toEdit = null;
+        return view("auth.register", compact('toEdit', 'users'));
     }
 
     public function loginUser(Request $request) {

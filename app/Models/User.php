@@ -9,7 +9,14 @@ class User extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['password'];
+    protected $fillable = [
+        'name',
+        'surname',
+        'email',
+        'login',
+        'role',
+        'password'
+    ];
 
     public function items()
     {

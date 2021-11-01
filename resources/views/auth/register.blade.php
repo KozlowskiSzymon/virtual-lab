@@ -22,7 +22,7 @@
         <div class="col-12" style="padding: 20px 20px 20px 20px;">
             <h4>Users</h4>
             <hr>
-            <form action="{{route('register-user')}}" method="post">
+            <form action="save-user" method="post">
                 @if(Session::has('success'))
                     <div class="alert alert-success">{{Session::get('success')}}</div>
                 @endif
@@ -32,22 +32,38 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{old('name')}}">
+                    @if($toEdit)
+                        <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{$toEdit['name']}}">
+                    @else
+                        <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{old('name')}}">
+                    @endif
                     <span class="text-danger">@error('name') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="surname">Surname</label>
-                    <input type="text" class="form-control" placeholder="Enter surname" name="surname" value="{{old('surname')}}">
+                    @if($toEdit)
+                        <input type="text" class="form-control" placeholder="Enter surname" name="surname" value="{{$toEdit['surname']}}">
+                    @else
+                        <input type="text" class="form-control" placeholder="Enter surname" name="surname" value="{{old('surname')}}">
+                    @endif
                     <span class="text-danger">@error('surname') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" placeholder="Enter email" name="email" value="{{old('email')}}">
+                    @if($toEdit)
+                        <input type="text" class="form-control" placeholder="Enter email" name="email" value="{{$toEdit['email']}}">
+                    @else
+                        <input type="text" class="form-control" placeholder="Enter email" name="email" value="{{old('email')}}">
+                    @endif
                     <span class="text-danger">@error('email') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="login">Login</label>
-                    <input type="text" class="form-control" placeholder="Enter login" name="login" value="{{old('login')}}">
+                    @if($toEdit)
+                        <input type="text" class="form-control" placeholder="Enter login" name="login" value="{{$toEdit['login']}}">
+                    @else
+                        <input type="text" class="form-control" placeholder="Enter login" name="login" value="{{old('login')}}">
+                    @endif
                     <span class="text-danger">@error('login') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
@@ -58,13 +74,20 @@
                 <div class="form-group">
                     <label for="role">Role</label>
                     <select class="form-control" name="role">
-                        <option value="{{\App\Models\Role::Admin}}">Admin</option>
-                        <option value="{{\App\Models\Role::User}}">User</option>
+                        <option value="{{\App\Models\Role::Admin}}"
+                        @if($toEdit && $toEdit['role'] == 'ADMIN') selected @endif>Admin</option>
+                        <option value="{{\App\Models\Role::User}}"
+                        @if($toEdit && $toEdit['role'] == 'USER') selected @endif>User</option>
                     </select>
                     <span class="text-danger">@error('password') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group" style="margin-top: 20px;">
-                    <button class="btn btn-block btn-primary" type="submit">Add</button>
+                    @if($toEdit)
+                        <input type="hidden" value="{{$toEdit['id']}}" name="id" />
+                        <button class="btn btn-block btn-primary" type="submit">Update</button>
+                    @else
+                        <button class="btn btn-block btn-primary" type="submit">Add</button>
+                    @endif
                 </div>
             </form>
         </div>
@@ -90,7 +113,7 @@
                         <td>{{$row['login']}}</td>
                         <td>{{$row['role']}}</td>
                         <td style="width: 5%; text-align: center; vertical-align: middle">
-                            <form action="/edit-user" method="get">
+                            <form action="/edit-user" method="post">
                                 @csrf
                                 <input type="hidden" value="{{$row['id']}}" name="id" />
                                 <button type="submit" class="btn btn-block btn-primary">

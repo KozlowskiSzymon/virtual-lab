@@ -23,7 +23,7 @@
         <div class="col-12" style="padding: 20px 20px 20px 20px;">
             <h4>Items</h4>
             <hr>
-            <form action="add-item" method="post">
+            <form action="save-item" method="post">
                 @if(Session::has('success'))
                     <div class="alert alert-success">{{Session::get('success')}}</div>
                 @endif
@@ -33,36 +33,65 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{old('name')}}">
+                    @if($toEdit)
+                        <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{$toEdit['name']}}">
+                    @else
+                        <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{old('name')}}">
+                    @endif
                     <span class="text-danger">@error('name') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="model">Model</label>
-                    <input type="text" class="form-control" placeholder="Enter model" name="model" value="{{old('model')}}">
+                    @if($toEdit)
+                        <input type="text" class="form-control" placeholder="Enter model" name="model" value="{{$toEdit['model']}}">
+                    @else
+                        <input type="text" class="form-control" placeholder="Enter model" name="model" value="{{old('model')}}">
+                    @endif
                     <span class="text-danger">@error('model') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="image">Image</label>
-                    <input type="text" class="form-control" placeholder="Enter image url" name="image" value="{{old('image')}}">
+                    @if($toEdit)
+                        <input type="text" class="form-control" placeholder="Enter image url" name="image" value="{{$toEdit['image']}}">
+                    @else
+                        <input type="text" class="form-control" placeholder="Enter image url" name="image" value="{{old('image')}}">
+                    @endif
                     <span class="text-danger">@error('image') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" placeholder="Enter description" name="description" value="{{old('description')}}">
+                    @if($toEdit)
+                        <input type="text" class="form-control" placeholder="Enter description" name="description" value="{{$toEdit['description']}}">
+                    @else
+                        <input type="text" class="form-control" placeholder="Enter description" name="description" value="{{old('description')}}">
+                    @endif
                     <span class="text-danger">@error('description') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="link">Link</label>
-                    <input type="text" class="form-control" placeholder="Enter link" name="link" value="{{old('link')}}">
+                    @if($toEdit)
+                        <input type="text" class="form-control" placeholder="Enter link" name="link" value="{{$toEdit['url']}}">
+                    @else
+                        <input type="text" class="form-control" placeholder="Enter link" name="link" value="{{old('url')}}">
+                    @endif
                     <span class="text-danger">@error('link') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
-                    <input type="text" class="form-control" placeholder="Enter quantity" name="quantity" value="{{old('quantity')}}">
+                    @if($toEdit)
+                        <input type="text" class="form-control" placeholder="Enter quantity" name="quantity" value="{{$toEdit['quantity']}}">
+                    @else
+                        <input type="text" class="form-control" placeholder="Enter quantity" name="quantity" value="{{old('quantity')}}">
+                    @endif
                     <span class="text-danger">@error('quantity') {{$message}} @enderror</span>
                 </div>
                 <div class="form-group" style="margin-top: 20px;">
-                    <button class="btn btn-block btn-primary" type="submit">Add</button>
+                    @if($toEdit)
+                        <input type="hidden" value="{{$toEdit['id']}}" name="id" />
+                        <button class="btn btn-block btn-primary" type="submit">Update</button>
+                    @else
+                        <button class="btn btn-block btn-primary" type="submit">Add</button>
+                    @endif
                 </div>
             </form>
             <div class="table-responsive">
