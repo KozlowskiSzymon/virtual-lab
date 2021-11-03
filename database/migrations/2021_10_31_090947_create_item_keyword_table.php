@@ -14,6 +14,7 @@ class CreateItemKeywordTable extends Migration
     public function up()
     {
         Schema::create('item_keyword', function (Blueprint $table) {
+            $table->id();
             $table->integer('item_id')->unsigned();
             $table->integer('keyword_id')->unsigned();
             $table->timestamps();
