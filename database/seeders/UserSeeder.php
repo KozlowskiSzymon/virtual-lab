@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
+            'id' => '1',
             'name' => 'James',
             'surname' => 'Bond',
             'email' => 'james.bond@gmail.com',
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
             'role' => Role::Admin
         ]);
         DB::table('users')->insert([
+            'id' => '2',
             'name' => 'John',
             'surname' => 'Wall',
             'email' => 'john.wall@gmail.com',
@@ -33,6 +35,7 @@ class UserSeeder extends Seeder
             'role' => Role::Admin
         ]);
         DB::table('users')->insert([
+            'id' => '3',
             'name' => 'Michael',
             'surname' => 'Jordan',
             'email' => 'michael.jordan@gmail.com',
@@ -41,6 +44,7 @@ class UserSeeder extends Seeder
             'role' => Role::User
         ]);
         DB::table('users')->insert([
+            'id' => '4',
             'name' => 'Kobe',
             'surname' => 'Bryant',
             'email' => 'kobe.bryant@gmail.com',
@@ -49,6 +53,7 @@ class UserSeeder extends Seeder
             'role' => Role::User
         ]);
         DB::table('users')->insert([
+            'id' => '5',
             'name' => 'Anna',
             'surname' => 'Karenina',
             'email' => 'anna.karenina@gmail.com',
