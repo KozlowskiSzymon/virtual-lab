@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script></head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 </head>
 <body>
 <header class="row">
@@ -82,6 +82,22 @@
                         <input type="text" class="form-control" placeholder="Enter quantity" name="quantity" value="{{$toEdit['quantity']}}">
                     @else
                         <input type="text" class="form-control" placeholder="Enter quantity" name="quantity" value="{{old('quantity')}}">
+                    @endif
+                    <span class="text-danger">@error('quantity') {{$message}} @enderror</span>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Keywords</label>
+                    @if($toEdit)
+                        <select class="selectpicker form-control" name="keywords[]" multiple>
+                            @foreach($keywords as $row)
+                                <option value="{{$row['id']}}" {{ in_array($row['id'], $toEditKeywords) ? 'selected' : '' }}>{{$row['name']}}</option>
+                            @endforeach
+                        </select>                    @else
+                        <select class="selectpicker form-control" name="keywords[]" multiple>
+                            @foreach($keywords as $row)
+                                <option value="{{$row['id']}}">{{$row['name']}}</option>
+                            @endforeach
+                        </select>
                     @endif
                     <span class="text-danger">@error('quantity') {{$message}} @enderror</span>
                 </div>

@@ -43,16 +43,21 @@ class ItemController extends Controller
     public function items() {
         $items = DB::table('items')->get();
         $items = json_decode($items, true);
+        $keywords = DB::table('keywords')->get();
+        $keywords = json_decode($keywords, true);
 
         $toEdit = null;
-        return view("items", compact('toEdit', 'items'));
+        return view("items", compact('toEdit', 'items', 'keywords'));
     }
 
     public function editItem(Request $request) {
         $items = DB::table('items')->get();
         $items = json_decode($items, true);
-        $toEdit = Item::query()->where('id', '=', $request -> id)->first();
-        return view("items", compact('toEdit', 'items'));
+        $keywords = DB::table('keywords')->get();
+        $keywords = json_decode($keywords, true);
+        $toEdit = Item::query()->where('id', '=', $request -> id)->with('keywords')->first();
+        $toEditKeywords = $toEdit->getKeywordsIdsAttribute()->toArray();
+        return view("items", compact('toEdit', 'items', 'keywords', 'toEditKeywords'));
     }
 
     public function removeItem(Request $request) {
@@ -64,6 +69,8 @@ class ItemController extends Controller
     }
 
     public function saveItem(Request $request) {
+        $keywords = DB::table('keywords')->get();
+        $keywords = json_decode($keywords, true);
         if ($request -> id) {
             $request->validate([
                 'name'=>'required',
@@ -79,13 +86,15 @@ class ItemController extends Controller
                 'url' => $request->url,
                 'quantity' => $request->quantity
             ]);
+            $item->keywords()->detach();
+            $item->keywords()->attach($request->keywords);
             $items = DB::table('items')->get();
             $items = json_decode($items, true);
             $toEdit = null;
             if ($res) {
-                return view("items", compact('toEdit', 'items'))->with('success', 'Item updated.');
+                return view("items", compact('toEdit', 'items', 'keywords'))->with('success', 'Item updated.');
             } else {
-                return view("items", compact('toEdit', 'items'))->with('fail', 'Error occurred. Item has not been updated.');
+                return view("items", compact('toEdit', 'items', 'keywords'))->with('fail', 'Error occurred. Item has not been updated.');
             }
         } else {
             $request->validate([
@@ -100,14 +109,16 @@ class ItemController extends Controller
             $item->image = $request->image;
             $item->url = $request->url;
             $item->quantity = $request->quantity;
+            $item->available = $request->quantity;
             $res = $item->save();
+            $item->keywords()->attach($request->keywords);
             $items = DB::table('items')->get();
             $items = json_decode($items, true);
             $toEdit = null;
             if ($res) {
-                return view("items", compact('toEdit', 'items'))->with('success', 'Item added.');
+                return view("items", compact('toEdit', 'items', 'keywords'))->with('success', 'Item added.');
             } else {
-                return view("items", compact('toEdit', 'items'))->with('fail', 'Error occurred. Item has not been added.');
+                return view("items", compact('toEdit', 'items', 'keywords'))->with('fail', 'Error occurred. Item has not been added.');
             }
         }
     }

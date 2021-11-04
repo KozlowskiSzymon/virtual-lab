@@ -27,4 +27,9 @@ class Item extends Model
     {
         return $this->belongsToMany(Keyword::class);
     }
+
+    public function getKeywordsIdsAttribute()
+    {
+        return $this->keywords()->pluck('keyword_id');
+    }
 }
